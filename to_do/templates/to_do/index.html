@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+<div class="col mt-4">
+  <h2>Add Item</h2>
+</div>
+<form method="POST" action="{% url 'to_do:index' %}" class="row row-cols-lg-auto">
+  {% csrf_token %}
+  <div class="col-12"> {{form.text}} </div>
+  <div class="col-12">
+    <button class="btn btn-primary mb-2" type="submit" id="">Submit</button>
+  </div>
+</form>
+{% if get_todo %}
+<div class="row mt-4">
+  <div class="col">
+    <ul class="list-group">
+      {% for item in get_todo%}
+      <li class="list-group-item row">
+        {% if item.completed == True %}
+        <strike><strong>{{ item.text }}</strong></strike>
+        {% else %}
+        <strong>{{ item.text }}</strong>
+        {% endif %} added on <i>{{ item.added_date}}</i>
+        <form method="POST" action="{% url 'to_do:deletetodo' %}">
+          {% csrf_token %}
+          <div style="float: right">
+            <button class="btn btn-sm btn-danger" name="delete_id" type="submit" value="{{ item.id }}">Delete</button>
+          </div>
+        </form>
+        <form method="POST" action="{% url 'to_do:updatetodo' item.id %}">
+          {% csrf_token %}
+          <div class="float-right">
+            <button class="btn btn-sm btn-danger" name="update_id" type="submit">Update</button>
+          </div>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% else %}
+<h2>No items added yet</h2>
+{% endif %} {% endblock %}
