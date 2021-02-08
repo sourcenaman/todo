@@ -14,8 +14,7 @@ A simple ToDo app where you can create, edit and delete your tasks.
 
 - [Python](https://www.python.org/)
 - [Django](https://www.djangoproject.com/)
-
-* [Bootstrap](https://getbootstrap.com/)
+- [Bootstrap](https://getbootstrap.com/)
 
 <!-- GETTING STARTED -->
 
